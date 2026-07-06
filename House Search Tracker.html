@@ -10,32 +10,23 @@
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #f5f5f7;
-    color: #1d1d1f;
-    min-height: 100vh;
+    background: #f5f5f7; color: #1d1d1f; min-height: 100vh;
   }
 
   header {
-    background: #fff;
-    border-bottom: 1px solid #e5e5e7;
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    background: #fff; border-bottom: 1px solid #e5e5e7;
+    padding: 16px 20px; display: flex; align-items: center;
+    justify-content: space-between; position: sticky; top: 0; z-index: 100;
   }
-
-  header h1 { font-size: 18px; font-weight: 600; color: #1d1d1f; }
+  header h1 { font-size: 18px; font-weight: 600; }
   header .subtitle { font-size: 12px; color: #6e6e73; margin-top: 2px; }
 
   .add-btn {
     background: #0071e3; color: #fff; border: none; border-radius: 8px;
     padding: 8px 14px; font-size: 13px; font-weight: 500; cursor: pointer;
-    display: flex; align-items: center; gap: 6px;
   }
   .add-btn:hover { background: #0077ed; }
+  .add-btn:disabled { background: #aaa; cursor: not-allowed; }
 
   .filter-bar { padding: 12px 20px; display: flex; gap: 8px; flex-wrap: wrap; background: #f5f5f7; }
 
@@ -43,18 +34,18 @@
     border: 1.5px solid transparent; border-radius: 20px; padding: 5px 14px;
     font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s;
   }
-  .filter-btn.all    { background: #1d1d1f; color: #fff; border-color: #1d1d1f; }
+  .filter-btn.all           { background: #1d1d1f; color: #fff; border-color: #1d1d1f; }
   .filter-btn.not-contacted { background: #fff; color: #636366; border-color: #d1d1d6; }
   .filter-btn.contacted     { background: #fff; color: #0071e3; border-color: #0071e3; }
   .filter-btn.viewing       { background: #fff; color: #9c5d00; border-color: #f0a500; }
   .filter-btn.viewed        { background: #fff; color: #1c7a43; border-color: #34c759; }
   .filter-btn.rejected      { background: #fff; color: #888; border-color: #ccc; }
-  .filter-btn.active.all          { background: #1d1d1f; color: #fff; }
-  .filter-btn.active.not-contacted{ background: #636366; color: #fff; }
-  .filter-btn.active.contacted    { background: #0071e3; color: #fff; }
-  .filter-btn.active.viewing      { background: #f0a500; color: #fff; }
-  .filter-btn.active.viewed       { background: #34c759; color: #fff; }
-  .filter-btn.active.rejected     { background: #aaa; color: #fff; }
+  .filter-btn.active.all           { background: #1d1d1f; color: #fff; }
+  .filter-btn.active.not-contacted { background: #636366; color: #fff; }
+  .filter-btn.active.contacted     { background: #0071e3; color: #fff; }
+  .filter-btn.active.viewing       { background: #f0a500; color: #fff; }
+  .filter-btn.active.viewed        { background: #34c759; color: #fff; }
+  .filter-btn.active.rejected      { background: #aaa; color: #fff; }
   .filter-count { background: rgba(255,255,255,0.3); border-radius: 10px; padding: 1px 6px; font-size: 11px; }
   .filter-btn:not(.active) .filter-count { background: #f0f0f0; }
 
@@ -67,16 +58,17 @@
 
   .property-card {
     background: #fff; border-radius: 12px; border: 1.5px solid #e5e5e7;
-    overflow: hidden; transition: box-shadow 0.15s; position: relative;
+    overflow: hidden; transition: box-shadow 0.15s;
   }
   .property-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .property-card.saving { opacity: 0.7; }
 
   .card-header { padding: 14px 14px 10px; border-bottom: 1px solid #f0f0f0; }
   .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
   .property-address { font-size: 14px; font-weight: 600; color: #1d1d1f; line-height: 1.3; flex: 1; }
   .property-area { font-size: 11px; color: #6e6e73; margin-top: 2px; }
   .card-actions { display: flex; gap: 6px; align-items: center; }
-  .icon-btn { background: none; border: none; cursor: pointer; color: #aaa; font-size: 14px; padding: 2px 4px; border-radius: 4px; line-height: 1; }
+  .icon-btn { background: none; border: none; cursor: pointer; color: #aaa; font-size: 14px; padding: 2px 4px; border-radius: 4px; }
   .icon-btn:hover { color: #555; background: #f0f0f0; }
   .icon-btn.delete:hover { color: #ff3b30; background: #fff0ee; }
   .star-btn { color: #aaa; font-size: 16px; }
@@ -107,34 +99,66 @@
   .notes-area {
     width: 100%; border: 1.5px solid #e5e5e7; border-radius: 8px; padding: 7px 10px;
     font-size: 12px; font-family: inherit; color: #3a3a3c; resize: vertical; min-height: 50px;
-    background: #fafafa; transition: border-color 0.15s; line-height: 1.5;
+    background: #fafafa; line-height: 1.5;
   }
   .notes-area:focus { outline: none; border-color: #0071e3; background: #fff; }
   .notes-area::placeholder { color: #c0c0c5; }
+
   .card-footer { padding: 8px 14px 12px; display: flex; align-items: center; justify-content: space-between; }
-  .listing-link { font-size: 12px; color: #0071e3; text-decoration: none; display: flex; align-items: center; gap: 4px; }
+  .listing-link { font-size: 12px; color: #0071e3; text-decoration: none; }
   .listing-link:hover { text-decoration: underline; }
   .save-indicator { font-size: 10px; color: #aaa; opacity: 0; transition: opacity 0.3s; }
   .save-indicator.show { opacity: 1; }
 
+  /* Loading state */
+  .loading-screen {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 300px; gap: 14px; color: #888;
+  }
+  .spinner {
+    width: 28px; height: 28px; border: 3px solid #e5e5e7;
+    border-top-color: #0071e3; border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .error-banner {
+    background: #fff0ee; border: 1px solid #ffd0cb; border-radius: 10px;
+    padding: 14px 18px; margin: 20px; color: #c0392b; font-size: 13px;
+    display: none;
+  }
+  .error-banner.show { display: block; }
+
+  /* Not configured state */
+  .setup-banner {
+    background: #fff8e6; border: 1px solid #f0d080; border-radius: 10px;
+    padding: 18px 20px; margin: 20px; font-size: 13px; line-height: 1.7; color: #5a4000;
+  }
+  .setup-banner code {
+    background: #f0e8c8; padding: 1px 5px; border-radius: 4px; font-family: monospace; font-size: 12px;
+  }
+
+  /* Modal */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 200; align-items: center; justify-content: center; }
   .modal-overlay.open { display: flex; }
   .modal { background: #fff; border-radius: 16px; padding: 24px; width: 480px; max-width: 95vw; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
   .modal h2 { font-size: 17px; font-weight: 600; margin-bottom: 18px; }
   .form-group { margin-bottom: 14px; }
   .form-group label { display: block; font-size: 12px; font-weight: 500; color: #6e6e73; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.3px; }
-  .form-group input, .form-group select, .form-group textarea { width: 100%; border: 1.5px solid #e5e5e7; border-radius: 8px; padding: 9px 12px; font-size: 14px; font-family: inherit; color: #1d1d1f; background: #fafafa; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; border: 1.5px solid #e5e5e7; border-radius: 8px; padding: 9px 12px;
+    font-size: 14px; font-family: inherit; color: #1d1d1f; background: #fafafa;
+  }
   .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #0071e3; background: #fff; }
   .form-group textarea { resize: vertical; min-height: 70px; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .modal-actions { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; }
   .btn-secondary { background: #f0f0f0; color: #1d1d1f; border: none; border-radius: 8px; padding: 9px 16px; font-size: 14px; font-weight: 500; cursor: pointer; }
-  .btn-secondary:hover { background: #e0e0e0; }
   .btn-primary { background: #0071e3; color: #fff; border: none; border-radius: 8px; padding: 9px 16px; font-size: 14px; font-weight: 500; cursor: pointer; }
-  .btn-primary:hover { background: #0077ed; }
+  .btn-primary:disabled { background: #aaa; cursor: not-allowed; }
+
   .empty-state { text-align: center; padding: 60px 20px; color: #888; grid-column: 1 / -1; }
   .empty-state .icon { font-size: 40px; margin-bottom: 12px; }
-  .empty-state p { font-size: 14px; }
 </style>
 </head>
 <body>
@@ -142,13 +166,20 @@
 <header>
   <div>
     <h1>🏠 House Search Tracker</h1>
-    <div class="subtitle" id="header-subtitle">Loading...</div>
+    <div class="subtitle" id="header-subtitle">Loading…</div>
   </div>
-  <button class="add-btn" onclick="openModal()">+ Add Property</button>
+  <button class="add-btn" id="add-btn" onclick="openModal()" disabled>+ Add Property</button>
 </header>
 
+<div class="error-banner" id="error-banner"></div>
+
 <div class="filter-bar" id="filter-bar"></div>
-<div class="properties-grid" id="properties-grid"></div>
+<div class="properties-grid" id="properties-grid">
+  <div class="loading-screen" style="grid-column:1/-1">
+    <div class="spinner"></div>
+    <div>Loading your properties…</div>
+  </div>
+</div>
 
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal">
@@ -191,91 +222,87 @@
     <div class="form-group"><label>Notes</label><textarea id="f-notes" placeholder="Condition, impressions, flags..."></textarea></div>
     <div class="modal-actions">
       <button class="btn-secondary" onclick="closeModal()">Cancel</button>
-      <button class="btn-primary" onclick="saveProperty()">Save</button>
+      <button class="btn-primary" id="modal-save-btn" onclick="saveProperty()">Save</button>
     </div>
   </div>
 </div>
 
 <script>
-const STORAGE_KEY = 'house-tracker-v1';
-
-const DEFAULT_PROPERTIES = [
-  { id: 1, address: 'Pennant Close, Birchwood', area: 'Outer Ring', price: '', status: 'not-contacted', interest: '', commuteTo: '30–50 min (19.7 mi)', commuteFrom: '35 min–1 hr (22.3 mi)', url: 'https://www.zoopla.co.uk/for-sale/details/73228339/', notes: '', starred: false },
-  { id: 2, address: 'Viscount Road, Padgate', area: 'Outer Ring', price: '', status: 'not-contacted', interest: '', commuteTo: '35–55 min (21.3 mi)', commuteFrom: '35 min–1 hr (22.0 mi)', url: 'https://www.zoopla.co.uk/for-sale/details/73019255/', notes: '', starred: false },
-  { id: 3, address: 'Gilbert Drive, Warrington', area: 'Outer Ring', price: '', status: 'not-contacted', interest: '', commuteTo: '30–50 min (20.1 mi)', commuteFrom: '30–55 min (19.3 mi)', url: 'https://www.zoopla.co.uk/for-sale/details/72802898/', notes: '', starred: false },
-  { id: 4, address: 'Nook Lane, Warrington', area: 'Outer Ring', price: '', status: 'not-contacted', interest: 'low', commuteTo: '30–45 min (19.7 mi)', commuteFrom: '30–55 min (19.0 mi)', url: 'https://www.zoopla.co.uk/for-sale/details/72151351/', notes: 'Needs a lot of work', starred: false },
-  { id: 5, address: 'Eric Avenue, Padgate', area: 'Warrington WA1', price: '', status: 'viewing', interest: 'very-good', commuteTo: '35–55 min (21.9 mi)', commuteFrom: '35 min–1 hr (21.1 mi)', url: 'https://www.rightmove.co.uk/properties/88384632', notes: '⭐ TOP pick\nView booked for 8th July.', starred: true },
-  { id: 6, address: 'Moseley Avenue', area: 'Warrington WA4', price: '', status: 'not-contacted', interest: '', commuteTo: '26–40 min (19.1 mi)', commuteFrom: '30–55 min (19.1 mi)', url: 'https://www.zoopla.co.uk/new-homes/details/72133445/', notes: 'New homes', starred: false },
-  { id: 7, address: 'Padgate Lane', area: 'Warrington WA1', price: '', status: 'contacted', interest: '', commuteTo: '26–40 min (21.6 mi)', commuteFrom: '30–55 min (21.6 mi)', url: 'https://www.rightmove.co.uk/properties/88044576', notes: 'Sent request', starred: false },
-  { id: 8, address: 'Moss Lane, Cadishead', area: 'M44', price: '', status: 'contacted', interest: 'low', commuteTo: '22–40 min (11.7 mi)', commuteFrom: '24–45 min (11.2 mi)', url: 'https://www.zoopla.co.uk/for-sale/details/70458037', notes: 'Requires a lot of work', starred: false },
-  { id: 9, address: 'Inglewood Close, Partington', area: 'M31', price: '£220,000', status: 'contacted', interest: 'low', commuteTo: '', commuteFrom: '', url: 'https://www.rightmove.co.uk/properties/89638575', notes: 'Received email for viewing. House pretty small, needs basic renovation. Not very sure about this.', starred: false },
-  { id: 10, address: 'Linden Close, Woolston', area: 'Warrington WA1', price: '', status: 'not-contacted', interest: '', commuteTo: '', commuteFrom: '', url: 'https://www.rightmove.co.uk/properties/172429631', notes: '', starred: false },
-  { id: 11, address: 'Tweedsmuir Close, Fearnhead', area: 'WA2', price: '£230,000', status: 'viewed', interest: '', commuteTo: '26–40 min (21.1 mi)', commuteFrom: '35–55 min (20.8 mi)', url: 'https://www.rightmove.co.uk/properties/174872480', notes: 'Added 24/04/2026. Received email for arranging viewing.', starred: false },
-  { id: 12, address: 'Charlton Fold, Worsley', area: 'Manchester M28', price: '', status: 'not-contacted', interest: '', commuteTo: '', commuteFrom: '', url: 'https://www.rightmove.co.uk/properties/89909607', notes: '', starred: false },
-  { id: 13, address: 'Hilton Street, Little Hulton', area: 'Manchester M38', price: '', status: 'not-contacted', interest: '', commuteTo: '', commuteFrom: '', url: 'https://www.rightmove.co.uk/properties/88800738', notes: '', starred: false },
-  { id: 14, address: 'Hollow Meadow, Radcliffe', area: 'Manchester', price: '', status: 'viewing', interest: '', commuteTo: '35 min–1 hr 5 min (17.4 mi)', commuteFrom: '40 min–1 hr 25 min (17.6 mi)', url: 'https://www.vebra.com/vebra/property/34755853', notes: 'Viewing rebooked: 1 Jul. Called by agent, replied via email.', starred: false },
-  { id: 15, address: 'Cliftonville Road, Woolston', area: 'WA1', price: '', status: 'viewed', interest: '', commuteTo: '30–50 min (19.7 mi)', commuteFrom: '28–50 min (19.6 mi)', url: 'https://www.rightmove.co.uk/properties/87847356', notes: 'Already viewed.', starred: false },
-  { id: 16, address: 'Alder Road, Woolston', area: 'WA1', price: '', status: 'rejected', interest: '', commuteTo: '', commuteFrom: '', url: 'https://www.rightmove.co.uk/properties/88762932', notes: 'SOLD — received email confirmation.', starred: false },
-  { id: 17, address: 'Fieldfare Close, Birchwood', area: 'Warrington', price: '', status: 'contacted', interest: '', commuteTo: '', commuteFrom: '', url: 'https://www.rightmove.co.uk/properties/89123319', notes: 'Received automatic email, sent form.', starred: false },
-  { id: 18, address: 'Woodhouse Close, Birchwood', area: 'Warrington WA3', price: '£200,000', status: 'not-contacted', interest: '', commuteTo: '', commuteFrom: '', url: 'https://www.zoopla.co.uk/for-sale/follow-up/73525268/?buyerType=first-time-buyer', notes: '', starred: false },
-  { id: 19, address: 'Edale Close, Irlam', area: 'Irlam M44', price: '', status: 'contacted', interest: '', commuteTo: '24–45 min (13.3 mi)', commuteFrom: '24–50 min (12.9 mi)', url: 'https://www.zoopla.co.uk/for-sale/details/73618996/', notes: '721 sq ft. Sent viewing request 03/07/26.', starred: false },
-  { id: 20, address: 'Greenheys Road, Little Hulton', area: 'Manchester M38', price: '', status: 'not-contacted', interest: '', commuteTo: '30–50 min (18.9 mi)', commuteFrom: '40 min–1 hr 30 min (19.3 mi)', url: 'https://www.rightmove.co.uk/properties/90386901', notes: '', starred: false },
-];
+// ─── CONFIG — replace with your Cloudflare Worker URL after deployment ───
+const WORKER_URL = 'https://housetracker.carminecivilli.workers.dev';
+// ─────────────────────────────────────────────────────────────────────────
 
 const INTEREST_CONFIG = {
-  '':          { label: 'Interest…' },
-  'low':       { label: 'Low' },
-  'ok':        { label: 'OK' },
-  'good':      { label: 'Good' },
-  'very-good': { label: 'Very good' },
+  '':          'Interest…',
+  'low':       'Low',
+  'ok':        'OK',
+  'good':      'Good',
+  'very-good': 'Very good',
 };
 
-function interestCls(val) { return val || 'unset'; }
-function interestOptions(current) {
-  return Object.entries(INTEREST_CONFIG).map(([val, cfg]) =>
-    `<option value="${val}" ${current === val ? 'selected' : ''}>${cfg.label}</option>`
-  ).join('');
-}
-
 const STATUS_CONFIG = {
-  'not-contacted': { label: 'Not contacted', cls: 'not-contacted' },
-  'contacted':     { label: 'Contacted',     cls: 'contacted' },
-  'viewing':       { label: 'Viewing booked',cls: 'viewing' },
-  'viewed':        { label: 'Viewed',        cls: 'viewed' },
-  'rejected':      { label: 'Rejected / Sold', cls: 'rejected' },
+  'not-contacted': { label: 'Not contacted',  cls: 'not-contacted' },
+  'contacted':     { label: 'Contacted',      cls: 'contacted' },
+  'viewing':       { label: 'Viewing booked', cls: 'viewing' },
+  'viewed':        { label: 'Viewed',         cls: 'viewed' },
+  'rejected':      { label: 'Rejected / Sold',cls: 'rejected' },
 };
 
 let properties = [];
 let activeFilter = 'all';
 let editingId = null;
-let nextId = 100;
+const notesTimers = {};
 
-function load() {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) {
-    try {
-      const parsed = JSON.parse(saved);
-      properties = parsed.properties || DEFAULT_PROPERTIES;
-      nextId = parsed.nextId || 100;
-    } catch(e) { properties = DEFAULT_PROPERTIES; }
-  } else {
-    properties = DEFAULT_PROPERTIES;
+// ─── API ─────────────────────────────────────────────────────────────────
+
+function isConfigured() {
+  return WORKER_URL && WORKER_URL !== 'YOUR_WORKER_URL';
+}
+
+async function api(method, path, body) {
+  const r = await fetch(WORKER_URL + path, {
+    method,
+    headers: body ? { 'Content-Type': 'application/json' } : {},
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  if (!r.ok) throw new Error(`API error ${r.status}`);
+  return r.json();
+}
+
+// ─── INIT ────────────────────────────────────────────────────────────────
+
+async function init() {
+  if (!isConfigured()) {
+    document.getElementById('properties-grid').innerHTML = `
+      <div class="setup-banner" style="margin:0">
+        <strong>⚙️ One more step to enable cross-device sync</strong><br><br>
+        This tracker saves to Notion so your data is available on any device.<br>
+        To finish setup:<br>
+        1. Deploy the <code>house-tracker-worker.js</code> file to <a href="https://workers.cloudflare.com" target="_blank">Cloudflare Workers</a><br>
+        2. Add your Notion API key as an environment variable named <code>NOTION_API_KEY</code><br>
+        3. Copy your Worker URL and replace <code>YOUR_WORKER_URL</code> at the top of this file<br>
+        4. Re-upload this file to GitHub
+      </div>`;
+    document.getElementById('header-subtitle').textContent = 'Setup required';
+    return;
+  }
+
+  try {
+    properties = await api('GET', '/properties');
+    document.getElementById('add-btn').disabled = false;
+    renderFilters();
+    renderProperties();
+    updateSubtitle();
+  } catch (e) {
+    showError('Could not load properties. Check your Worker URL and Notion API key. (' + e.message + ')');
   }
 }
 
-function save() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({ properties, nextId }));
-}
-
-function getStatusCounts() {
-  const counts = { all: properties.length };
-  Object.keys(STATUS_CONFIG).forEach(k => { counts[k] = properties.filter(p => p.status === k).length; });
-  return counts;
-}
+// ─── RENDER ──────────────────────────────────────────────────────────────
 
 function renderFilters() {
-  const counts = getStatusCounts();
-  const bar = document.getElementById('filter-bar');
+  const counts = { all: properties.length };
+  Object.keys(STATUS_CONFIG).forEach(k => { counts[k] = properties.filter(p => p.status === k).length; });
   const filters = [
     { key: 'all', label: 'All', cls: 'all' },
     { key: 'not-contacted', label: 'Not contacted', cls: 'not-contacted' },
@@ -284,7 +311,7 @@ function renderFilters() {
     { key: 'viewed', label: 'Viewed', cls: 'viewed' },
     { key: 'rejected', label: 'Rejected / Sold', cls: 'rejected' },
   ];
-  bar.innerHTML = filters.map(f => `
+  document.getElementById('filter-bar').innerHTML = filters.map(f => `
     <button class="filter-btn ${f.cls} ${activeFilter === f.key ? 'active' : ''}" onclick="setFilter('${f.key}')">
       ${f.label} <span class="filter-count">${counts[f.key] || 0}</span>
     </button>`).join('');
@@ -295,149 +322,220 @@ function setFilter(key) { activeFilter = key; renderFilters(); renderProperties(
 function renderProperties() {
   const grid = document.getElementById('properties-grid');
   const filtered = activeFilter === 'all' ? properties : properties.filter(p => p.status === activeFilter);
-  const interestRank = { 'very-good': 4, 'good': 3, 'ok': 2, 'low': 1, '': 0 };
+  const rank = { 'very-good': 4, 'good': 3, 'ok': 2, 'low': 1, '': 0 };
   const sorted = [...filtered].sort((a, b) => {
     if (b.starred !== a.starred) return (b.starred ? 1 : 0) - (a.starred ? 1 : 0);
-    return (interestRank[b.interest] || 0) - (interestRank[a.interest] || 0);
+    return (rank[b.interest] || 0) - (rank[a.interest] || 0);
   });
-  if (sorted.length === 0) {
-    grid.innerHTML = `<div class="empty-state"><div class="icon">🏘️</div><p>No properties in this category.</p></div>`;
+
+  if (!sorted.length) {
+    grid.innerHTML = `<div class="empty-state"><div class="icon">🏘️</div><p>No properties here.</p></div>`;
     return;
   }
-  grid.innerHTML = sorted.map(p => renderCard(p)).join('');
+
+  grid.innerHTML = sorted.map(renderCard).join('');
+
   grid.querySelectorAll('.notes-area').forEach(el => {
     el.addEventListener('input', () => {
-      const prop = properties.find(p => p.id === parseInt(el.dataset.id));
-      if (prop) { prop.notes = el.value; save(); showSaved(parseInt(el.dataset.id)); }
+      const id = el.dataset.id;
+      clearTimeout(notesTimers[id]);
+      notesTimers[id] = setTimeout(() => patchProperty(id, { notes: el.value }), 800);
     });
   });
+
   grid.querySelectorAll('.status-select').forEach(el => {
-    el.addEventListener('change', () => {
-      const prop = properties.find(p => p.id === parseInt(el.dataset.id));
-      if (prop) { prop.status = el.value; save(); renderFilters(); renderProperties(); }
-    });
+    el.addEventListener('change', () => patchProperty(el.dataset.id, { status: el.value }));
   });
+
   grid.querySelectorAll('.interest-select').forEach(el => {
-    el.addEventListener('change', () => {
-      const prop = properties.find(p => p.id === parseInt(el.dataset.id));
-      if (prop) { prop.interest = el.value; el.className = `interest-select ${interestCls(el.value)}`; save(); }
-    });
+    el.addEventListener('change', () => patchProperty(el.dataset.id, { interest: el.value }));
   });
 }
 
 function renderCard(p) {
   const sc = STATUS_CONFIG[p.status] || STATUS_CONFIG['not-contacted'];
-  const statusOptions = Object.entries(STATUS_CONFIG).map(([val, cfg]) =>
-    `<option value="${val}" ${p.status === val ? 'selected' : ''}>${cfg.label}</option>`).join('');
+  const statusOptions = Object.entries(STATUS_CONFIG).map(([v, c]) =>
+    `<option value="${v}" ${p.status === v ? 'selected' : ''}>${c.label}</option>`).join('');
+  const interestOptions = Object.entries(INTEREST_CONFIG).map(([v, l]) =>
+    `<option value="${v}" ${p.interest === v ? 'selected' : ''}>${l}</option>`).join('');
+  const intCls = p.interest || 'unset';
   const commuteHtml = (p.commuteTo || p.commuteFrom) ? `
     <div class="commute-row">
-      ${p.commuteTo ? `<div class="commute-chip"><div class="dir">→ To work</div>${p.commuteTo}</div>` : ''}
-      ${p.commuteFrom ? `<div class="commute-chip"><div class="dir">← From work</div>${p.commuteFrom}</div>` : ''}
+      ${p.commuteTo   ? `<div class="commute-chip"><div class="dir">→ To work</div>${esc(p.commuteTo)}</div>` : ''}
+      ${p.commuteFrom ? `<div class="commute-chip"><div class="dir">← From work</div>${esc(p.commuteFrom)}</div>` : ''}
     </div>` : '';
-  const priceHtml = p.price ? `<div class="price-tag">${p.price}</div>` : '';
   return `
-    <div class="property-card" data-id="${p.id}">
+    <div class="property-card" id="card-${p.id}">
       <div class="card-header">
         <div class="card-top">
           <div>
-            <div class="property-address">${escHtml(p.address)}</div>
-            <div class="property-area">${escHtml(p.area)}</div>
+            <div class="property-address">${esc(p.address)}</div>
+            <div class="property-area">${esc(p.area)}</div>
           </div>
           <div class="card-actions">
-            <button class="icon-btn star-btn ${p.starred ? 'starred' : ''}" onclick="toggleStar(${p.id})" title="Star">★</button>
-            <button class="icon-btn" onclick="editProperty(${p.id})" title="Edit">✏️</button>
-            <button class="icon-btn delete" onclick="deleteProperty(${p.id})" title="Delete">✕</button>
+            <button class="icon-btn star-btn ${p.starred ? 'starred' : ''}" onclick="toggleStar('${p.id}',${p.starred})" title="Star">★</button>
+            <button class="icon-btn" onclick="editProperty('${p.id}')" title="Edit">✏️</button>
+            <button class="icon-btn delete" onclick="deleteProperty('${p.id}')" title="Delete">✕</button>
           </div>
         </div>
         <div style="margin-top:8px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
           <select class="status-select ${sc.cls}" data-id="${p.id}">${statusOptions}</select>
-          <select class="interest-select ${interestCls(p.interest)}" data-id="${p.id}" data-type="interest">${interestOptions(p.interest)}</select>
+          <select class="interest-select ${intCls}" data-id="${p.id}">${interestOptions}</select>
         </div>
       </div>
       <div class="card-body">
-        ${priceHtml}${commuteHtml}
-        <textarea class="notes-area" data-id="${p.id}" placeholder="Notes, impressions, flags...">${escHtml(p.notes)}</textarea>
+        ${p.price ? `<div class="price-tag">${esc(p.price)}</div>` : ''}
+        ${commuteHtml}
+        <textarea class="notes-area" data-id="${p.id}" placeholder="Notes, impressions, flags...">${esc(p.notes)}</textarea>
         <div class="save-indicator" id="saved-${p.id}">Saved ✓</div>
       </div>
       <div class="card-footer">
-        ${p.url ? `<a href="${escHtml(p.url)}" target="_blank" class="listing-link">🔗 View listing</a>` : '<span></span>'}
+        ${p.url ? `<a href="${esc(p.url)}" target="_blank" class="listing-link">🔗 View listing</a>` : '<span></span>'}
       </div>
     </div>`;
 }
 
-function escHtml(str) {
-  return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+// ─── MUTATIONS ───────────────────────────────────────────────────────────
+
+async function patchProperty(id, changes) {
+  const card = document.getElementById('card-' + id);
+  if (card) card.classList.add('saving');
+  try {
+    const updated = await api('PATCH', '/properties/' + id, changes);
+    const idx = properties.findIndex(p => p.id === id);
+    if (idx !== -1) properties[idx] = updated;
+    showSaved(id);
+    renderFilters();
+    // Re-render interest select class without full re-render if only interest changed
+    if (changes.interest !== undefined) {
+      const sel = document.querySelector(`.interest-select[data-id="${id}"]`);
+      if (sel) sel.className = `interest-select ${changes.interest || 'unset'}`;
+    }
+    if (changes.status !== undefined) renderProperties();
+  } catch(e) {
+    showError('Failed to save. Check your connection. (' + e.message + ')');
+  } finally {
+    if (card) card.classList.remove('saving');
+  }
 }
-function showSaved(id) {
-  const el = document.getElementById(`saved-${id}`);
-  if (!el) return;
-  el.classList.add('show'); clearTimeout(el._t);
-  el._t = setTimeout(() => el.classList.remove('show'), 1500);
+
+async function toggleStar(id, current) {
+  await patchProperty(id, { starred: !current });
+  renderProperties();
 }
-function toggleStar(id) {
-  const p = properties.find(x => x.id === id);
-  if (p) { p.starred = !p.starred; save(); renderProperties(); }
-}
-function deleteProperty(id) {
+
+async function deleteProperty(id) {
   if (!confirm('Remove this property?')) return;
-  properties = properties.filter(p => p.id !== id);
-  save(); renderFilters(); renderProperties();
+  try {
+    await api('DELETE', '/properties/' + id);
+    properties = properties.filter(p => p.id !== id);
+    renderFilters();
+    renderProperties();
+  } catch(e) {
+    showError('Failed to delete. (' + e.message + ')');
+  }
 }
+
+// ─── MODAL ───────────────────────────────────────────────────────────────
+
 function openModal(id = null) {
   editingId = id;
   document.getElementById('modal-title').textContent = id ? 'Edit Property' : 'Add Property';
   if (id) {
     const p = properties.find(x => x.id === id);
     if (p) {
-      document.getElementById('f-address').value = p.address;
-      document.getElementById('f-area').value = p.area;
-      document.getElementById('f-price').value = p.price;
-      document.getElementById('f-status').value = p.status;
-      document.getElementById('f-interest').value = p.interest || '';
-      document.getElementById('f-commute-to').value = p.commuteTo;
+      document.getElementById('f-address').value   = p.address;
+      document.getElementById('f-area').value      = p.area;
+      document.getElementById('f-price').value     = p.price;
+      document.getElementById('f-status').value    = p.status;
+      document.getElementById('f-interest').value  = p.interest || '';
+      document.getElementById('f-commute-to').value   = p.commuteTo;
       document.getElementById('f-commute-from').value = p.commuteFrom;
-      document.getElementById('f-url').value = p.url;
-      document.getElementById('f-notes').value = p.notes;
+      document.getElementById('f-url').value       = p.url;
+      document.getElementById('f-notes').value     = p.notes;
     }
   } else {
-    ['f-address','f-area','f-price','f-commute-to','f-commute-from','f-url','f-notes'].forEach(i => document.getElementById(i).value = '');
-    document.getElementById('f-status').value = 'not-contacted';
+    ['f-address','f-area','f-price','f-commute-to','f-commute-from','f-url','f-notes']
+      .forEach(i => document.getElementById(i).value = '');
+    document.getElementById('f-status').value   = 'not-contacted';
     document.getElementById('f-interest').value = '';
   }
   document.getElementById('modal-overlay').classList.add('open');
   document.getElementById('f-address').focus();
 }
+
 function editProperty(id) { openModal(id); }
 function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); editingId = null; }
-function saveProperty() {
+
+async function saveProperty() {
   const address = document.getElementById('f-address').value.trim();
   if (!address) { alert('Please enter an address.'); return; }
   const data = {
-    address, area: document.getElementById('f-area').value.trim(),
-    price: document.getElementById('f-price').value.trim(),
-    status: document.getElementById('f-status').value,
-    interest: document.getElementById('f-interest').value,
-    commuteTo: document.getElementById('f-commute-to').value.trim(),
+    address,
+    area:        document.getElementById('f-area').value.trim(),
+    price:       document.getElementById('f-price').value.trim(),
+    status:      document.getElementById('f-status').value,
+    interest:    document.getElementById('f-interest').value,
+    commuteTo:   document.getElementById('f-commute-to').value.trim(),
     commuteFrom: document.getElementById('f-commute-from').value.trim(),
-    url: document.getElementById('f-url').value.trim(),
-    notes: document.getElementById('f-notes').value.trim(),
+    url:         document.getElementById('f-url').value.trim(),
+    notes:       document.getElementById('f-notes').value.trim(),
   };
-  if (editingId) {
-    const idx = properties.findIndex(p => p.id === editingId);
-    if (idx !== -1) properties[idx] = { ...properties[idx], ...data };
-  } else {
-    properties.push({ id: nextId++, starred: false, ...data });
+
+  const btn = document.getElementById('modal-save-btn');
+  btn.disabled = true; btn.textContent = 'Saving…';
+
+  try {
+    if (editingId) {
+      const updated = await api('PATCH', '/properties/' + editingId, data);
+      const idx = properties.findIndex(p => p.id === editingId);
+      if (idx !== -1) properties[idx] = updated;
+    } else {
+      const created = await api('POST', '/properties', { ...data, starred: false });
+      properties.push(created);
+    }
+    closeModal();
+    renderFilters();
+    renderProperties();
+  } catch(e) {
+    showError('Failed to save. (' + e.message + ')');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Save';
   }
-  save(); closeModal(); renderFilters(); renderProperties();
 }
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function showSaved(id) {
+  const el = document.getElementById('saved-' + id);
+  if (!el) return;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), 1500);
+}
+
+function showError(msg) {
+  const el = document.getElementById('error-banner');
+  el.textContent = '⚠️ ' + msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 5000);
+}
+
 function updateSubtitle() {
-  const total = properties.length;
   const active = properties.filter(p => p.status !== 'rejected').length;
   document.getElementById('header-subtitle').textContent =
-    `${active} active of ${total} tracked · Last updated: ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}`;
+    `${active} active of ${properties.length} tracked · synced with Notion`;
 }
-document.getElementById('modal-overlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
-load(); renderFilters(); renderProperties(); updateSubtitle();
+
+document.getElementById('modal-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeModal();
+});
+
+init();
 </script>
 </body>
 </html>
